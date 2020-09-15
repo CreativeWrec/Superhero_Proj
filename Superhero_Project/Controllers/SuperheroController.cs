@@ -4,21 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Superhero_Project.Data;
 using Superhero_Project.Models;
 
 namespace Superhero_Project.Controllers
 {
     public class SuperheroController : Controller
     {
-        // GET: SuperheroController
+        ApplicationDbContext _context;
+        public SuperheroController(ApplicationDbContext _context)
+        {
+            this._context = _context;
+        }
+        // GET: SuperheroController //Pull Superhero Table & Send it to the View()
         public ActionResult Index()
         {
-            return View();
+            List<Superhero> superheroes = _context.superheroes.ToList();
+            return View(superheroes);
         }
 
         // GET: SuperheroController/Details/5
         public ActionResult Details(int id)
         {
+            List<Superhero> superheroes = _context.superheroes.Where(s => s.Id == id).ToList();
             return View();
         }
 
