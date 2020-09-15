@@ -20,14 +20,17 @@ namespace Superhero_Project.Controllers
         public ActionResult Index()
         {
             List<Superhero> superheroes = _context.superheroes.ToList();
+
             return View(superheroes);
+            
         }
 
         // GET: SuperheroController/Details/5
         public ActionResult Details(int id)
         {
             List<Superhero> superheroes = _context.superheroes.Where(s => s.Id == id).ToList();
-            return View();
+
+            return View(superheroes);
         }
 
         // GET: SuperheroController/Create
